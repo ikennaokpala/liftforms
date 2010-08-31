@@ -28,7 +28,7 @@ class Boot {
       
     // Allowing access to css, images etc.. folders located in the resources source folder
     ResourceServer.allow {
-      case "jquery.js" :: Nil => true
+//      case "jquery.js" :: Nil => true
       case "js" :: _ => true
       case "css" :: _ => true
       case "images" :: _ => true
