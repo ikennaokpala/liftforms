@@ -1,0 +1,99 @@
+package com.liftforms.snippet
+
+
+import _root_.scala.xml._
+import _root_.net.liftweb.util._
+import Helpers._
+import _root_.net.liftweb.common.{Full, Empty}
+import net.liftweb.http.{StatefulSnippet, S, SHtml}
+
+class RentingForm extends StatefulSnippet {
+  var hvalidate = ""
+  var dispatch: DispatchIt = {
+
+    case "rent" => rentForm _
+    /*case "rent"  if hvalidate == "gotoeditDetail" => editDetails _
+    case "rent" => showDetails _*/
+  }
+  var (name, address, email, movieType, dateOfHire, numberOfDays, discount) = ("", "", "", "", "", "", "")
+  var movieMap = Seq("" -> "Select Movie Type", "Sci-fi" -> "Sci-fi", "Horror" -> "Horror", "Comedy" -> "Comedy", "Suspense" -> "Suspense", "Romance" -> "Romance")
+  var discountMap = Map("Regular Customer" -> "Regular Customer", "New Customer" -> "New Customer")
+  var hidden = ""
+
+
+  /*def formDetails(xhtml: NodeSeq): NodeSeq = {
+
+    dispatch = {
+      case name if name != "" => showDetails _
+      case hvalidate if hvalidate == "gotoeditDetail" => editDetails _
+      case _ => rentForm _
+    }
+  }*/
+
+  def rentForm(xhtml: NodeSeq): NodeSeq = {
+    dispatch = {
+      case name if name != "" => showDetails _
+    }
+    val discounts = SHtml.radio(discountMap.keys.toList, Full("New Customer"), discount = _, "class" -> "required")
+
+    var submitLabel = "Confirm"
+    bind("v", xhtml,
+      "name" -> SHtml.text(name, name = _, "class" -> "required"),
+      "address" -> SHtml.textarea(address, address = _, "rows" -> "5", "class" -> "required"),
+      "email" -> SHtml.text(email, email = _, "class" -> "required email"),
+      "movie" -> SHtml.select(movieMap, Empty, movieType = _, "class" -> "required"),
+      "date" -> SHtml.text(dateOfHire, dateOfHire = _, "class" -> "required date"),
+      "numberOfDays" -> SHtml.text(numberOfDays, numberOfDays = _, "class" -> "required"),
+      "regular" -> discounts(0),
+      "new" -> discounts(1),
+      "rtxt1" -> (discountMap.head.key),
+      "rtxt2" -> (discountMap.last.key),
+      "submit" -> SHtml.submit(submitLabel, () => {}, "id" -> "submit"),
+      "hidden" -> (""))
+  }
+
+  def showDetails(xhtml: NodeSeq): NodeSeq = {
+
+    val submitLabel = "Edit"
+    var hvalidate = "gotoeditDetail"
+    bind("v", xhtml,
+      "name" -> Text(name),
+      "address" -> Text(address),
+      "email" -> Text(email),
+      "movie" -> Text(movieType),
+      "date" -> Text(dateOfHire),
+      "numberOfDays" -> Text(numberOfDays),
+      "regular" -> Text(discount),
+      "new" -> Text(""),
+      "rtxt1" -> Text(""),
+      "rtxt2" -> Text(""),
+      "submit" -> SHtml.submit(submitLabel, () => S.mapSnippet("RentingForm.rent", editDetails _), "id" -> "submit"),
+      "hidden" -> SHtml.hidden(() => "valid", "name" -> "validate"))
+  }
+
+  def editDetails(xhtml: NodeSeq): NodeSeq = {
+    val discounts = SHtml.radio(discountMap.keys.toList, Full(discount), discount = _, "class" -> "required")    
+    bind("v", xhtml,
+      "name" -> SHtml.text(name, name = _, "class" -> "required"),
+      "address" -> SHtml.textarea(address, address = _, "rows" -> "5", "class" -> "required"),
+      "email" -> SHtml.text(email, email = _, "class" -> "required email"),
+      "movie" -> SHtml.select(movieMap, Full(movieType), movieType = _, "class" -> "required"),
+      "date" -> SHtml.text(dateOfHire, dateOfHire = _, "class" -> "required date"),
+      "numberOfDays" -> SHtml.text(numberOfDays, numberOfDays = _, "class" -> "required"),
+      "regular" -> discounts(0),
+      "new" -> discounts(1),
+      "rtxt1" -> (discountMap.head.key),
+      "rtxt2" -> (discountMap.last.key),
+      "submit" -> SHtml.submit("Save", () => S.redirecTo("/view"), "id" -> "submit"),
+      "hidden" -> SHtml.hidden(() => "valid", "name" -> "validate"))
+  }
+
+  /*if (name.is != "")
+  showDetails(xhtml)
+else
+  formDetails(xhtml)*/
+
+
+}
+
+

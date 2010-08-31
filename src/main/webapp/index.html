@@ -1,0 +1,66 @@
+<lift:surround with="default" at="content">
+
+    <lift:RentingForm.rent form="POST" id="confirmform" class="cmxform">
+
+            <fieldset>
+                <legend>Video Hire Details</legend>
+                
+                <div>
+
+                    <label for="name">Name:<span>*</span></label>
+
+                    <v:name/>
+
+                </div>
+                <div>
+                    <label for="address">Address:<span>*</span></label>
+
+                    <v:address/>
+
+                </div>
+                <div>
+                    <label for="email">Email:<span>*</span></label>
+                    <v:email/>
+
+                </div>
+                <div>
+                    <label for="movietype">Movie Type:<span>*</span></label>
+                    <v:movie/>
+
+                </div>
+                <div>
+                    <label for="dateOfHire">Date of Hire:<span>*</span></label>
+                    <v:date/>
+                    <span id="notify"> DD/MM/YYYY </span>
+                </div>
+                <div>
+                    <label for="numberOfDays">Number Of Days:<span>*</span></label>
+                    <v:numberOfDays/>
+                </div>
+                <div class="radio">
+                    <fieldset>
+                        <legend><span> Discount Rate:<span>*</span> </span></legend>
+
+                        <div>
+                              <v:regular/><label> <v:rtxt1/> </label>
+                             <v:new/> <label> <v:rtxt2/> </label>
+
+                            </div>
+
+                    </fieldset>
+                </div>
+                <div id="btn">
+
+                      <v:submit/>
+                    <input type="reset"/>
+                    <v:hidden/>
+                    
+
+                </div>
+            </fieldset>
+
+
+        <!--</form>-->
+    </lift:RentingForm.rent>
+</lift:surround>
+

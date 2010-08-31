@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:lift="http://liftweb.net/">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+
+    <title>Lift Forms | Keeping it Real..</title>
+    <link rel="stylesheet" type="text/css" href="/classpath/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/classpath/css/jquery.datepick.css"/>
+</head>
+<body>
+<h1>Video Rental !!</h1>
+
+<p>
+    <lift:HelloWorld.howdy/>
+</p>
+<h2>Fill the Form Below:</h2>
+
+<lift:bind name="content"/>
+
+<h2>Based on:</h2>
+<img src="/classpath/images/scala-logo.png"/>
+<img src="/classpath/images/lift-logo.png"/>
+<script  type="text/javascript" src="/classpath/js/jquery-latest.js"></script>
+<script  type="text/javascript" src="/classpath/js/jquery.validate.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $("#confirmform").validate({
+            rules:{
+                discount:{required:true}
+            }
+        });
+        
+    });
+</script>
+</body>
+</html>

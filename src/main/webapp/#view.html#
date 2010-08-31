@@ -1,0 +1,59 @@
+
+<lift:surround with="default" at="content">
+   <form>
+    <lift:RentingForm.showDetails >
+        <fieldset>
+            <legend>Video Hire Details</legend>
+
+            <div>
+
+                <label for="name">Name:<span>*</span></label>
+
+                <form:name/>
+
+            </div>
+            <div>
+                <label for="address">Address:<span>*</span></label>
+
+                <form:address/>
+
+            </div>
+            <div>
+                <label for="email">Email:<span>*</span></label>
+                <form:email/>
+
+            </div>
+            <div>
+                <label for="movietype">Movie Type:<span>*</span></label>
+                <form:movie/>
+
+            </div>
+            <div>
+                <label for="dateOfHire">Date of Hire:<span>*</span></label>
+                <form:date/>
+                <span id="notify"> DD/MM/YYYY </span>
+            </div>
+            <div>
+                <label for="numberOfDays">Number Of Days:<span>*</span></label>
+                <form:numberOfDays/>
+            </div>
+            <div class="radio">
+                <fieldset>
+                    <legend><span> Discount Rate:<span>*</span> </span></legend>
+
+                    <div>
+                        <form:regular/>
+                        
+
+
+                    </div>
+
+                </fieldset>
+            </div>
+            <div id="btn">
+                <button name="submit" id="submit" type="submit" value="Edit"> Edit</button>
+                <input type="hidden" name="validate" value="valid"/></div>
+        </fieldset>
+        </lift:RentingForm.showDetails>
+    </form>
+</lift:surround>
